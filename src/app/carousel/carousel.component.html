@@ -1,0 +1,21 @@
+<div >
+    <div class="card border-0 rounded-0 text-light app-ht">
+        <div class="position-relative">
+            <ngb-carousel #carousel interval="1300" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)">
+                <ng-template ngbSlide *ngFor="let img of images; index as i">
+                <div class="carousel-caption">
+                    <h3>{{img.name}}</h3>
+                </div>
+                <a href="{{img.imageUrl}}" target="_blank" rel="nofollow noopener noreferrer">
+                    <div class="picsum-img-wrapper">
+                    <img class="img-fluid w-100" [src]="img.imageUrl" alt="{{img.name}}">
+                    </div>
+                </a>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+</div>
+
+  
+  
