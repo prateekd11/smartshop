@@ -9,9 +9,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './authenticate/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
-import { ProductComponent } from './product/product.component';
-import { SearchComponent } from './search/search.component';
-import { ItemInfoComponent } from './item-info/item-info.component'
 
 @NgModule({
   declarations: [
@@ -19,10 +16,7 @@ import { ItemInfoComponent } from './item-info/item-info.component'
     SignupComponent,
     HomeComponent,
     LoginComponent,
-    CarouselComponent,
-    ProductComponent,
-    SearchComponent,
-    ItemInfoComponent
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

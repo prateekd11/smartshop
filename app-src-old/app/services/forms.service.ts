@@ -24,9 +24,4 @@ export class FormsService {
      return this.http.post(this.baseUrl+'/users/'+isUser,user, this.userAuthCredentials);
      //http://localhost:8082/users/true
    }
-
-   login(user): Observable<Object> {
-     //TODO write the url for login method
-     return this.http.post(this.baseUrl+ '/authenticate/',user, this.userAuthCredentials);
-   }
 }

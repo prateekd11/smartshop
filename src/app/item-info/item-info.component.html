@@ -1,0 +1,51 @@
+<div class="item-card">
+<img class="card-img-top" src="{{product.productImg}}" />
+<div class="card-body">
+  <div class="row">
+    <div class="col-auto">
+      <h5 class="card-title">{{product.productName}}</h5>
+    </div>
+
+    <div class="col text-right">
+      <h6 class="card-subtitle mt-1" id="price">{{product.ratePerQuantity | currency:'INR'}}</h6>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col mr-auto text-left">
+      <i class="material-icons" id="launchicon">
+        access_time
+      </i>
+      <p class="card-subtitle text-muted" id="launch">Date of Launch</p>
+      <p class="card-subtitle text-muted" id="date">{{product.dateOfManf | date:'dd/MM/yyyy'}}</p>
+    </div>
+
+    <div class="col mr-auto text-right float-right" >
+      <i class="material-icons" id="launchicon">
+        loyalty
+      </i>
+      <p class="card-subtitle text-muted" id="launch">{{product.brand}}</p>
+      <p class="card-subtitle text-muted" id="date">Date of Expiry {{product.dateOfExp | date:'dd/MM/yyyy'}}</p>
+    </div>
+    <br>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <span class="badge badge-success">{{product.aisle | titlecase}} Aisle</span>
+    </div>
+
+    <div class="col card-subtitle text-right" id="freedelivery">
+      <i class="material-icons delivery">
+        dashboard
+      </i>
+      <span class="badge badge-info ">{{product.shelf | titlecase}} Shelf</span>
+
+    </div>
+
+  </div>
+  
+  
+
+</div>
+</div>

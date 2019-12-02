@@ -3,17 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './authenticate/signup/signup.component';
 import { LoginComponent } from './authenticate/login/login.component';
-import { ProductComponent } from './product/product.component';
-import { SearchComponent } from './search/search.component';
 
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
   {path:'register', component:SignupComponent},
-  {path:'login', component:LoginComponent},
-  {path:'products', component:ProductComponent},
-  {path:'offers', component:LoginComponent},
-  {path:'search', component:SearchComponent}
+  {path:'login', component:LoginComponent}
 
 ];
 

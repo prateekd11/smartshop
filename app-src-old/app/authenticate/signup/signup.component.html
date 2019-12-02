@@ -89,9 +89,7 @@
                                     <label for="age">Age:</label>&nbsp;&nbsp;
                                     <input type="number" min="1" max="99" id="age" formControlName="age">
                                     <div class="alert alert-danger"*ngIf="age.touched && age.invalid">
-                                        <div *ngIf="age.errors?.required">Age is required</div>
-                                        <div *ngIf="age.errors?.ageNotValid">Age is not valid</div>
-                                    </div>
+                                        Age is required</div>
                                 </div>
                             </div>
                         </div>
@@ -120,10 +118,10 @@
                                     Confirmed password must be atleast 
                                     {{confirmPassword.errors.minlength.requiredLength}} characters long
                                 </div>
-                                <div *ngIf="form.errors?.passwordsMustMatch">
-                                    Passwords do not match</div>
                             </div>
-                            
+                            <div *ngIf="form.errors?.passwordsMustMatch"
+                                class="alert alert-danger">
+                                    Passwords do not match</div>
                             </div>
                            
                             <div class="form-group">

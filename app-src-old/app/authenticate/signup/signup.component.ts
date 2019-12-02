@@ -12,10 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  isUser:boolean = false;
-  form: FormGroup;
+  private isUser:boolean = false;
+  private form: FormGroup;
 
-  constructor(formBuilder: FormBuilder, private formsService: FormsService, private route: Router) { 
+  constructor(formBuilder: FormBuilder, private forms: FormsService, private route: Router) { 
 
     this.form = formBuilder.group({
       firstName : new FormControl('',[Validators.required, Validators.minLength(2)]),
@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
       password : new FormControl('',[Validators.required, Validators.minLength(4)]),
       confirmPassword : new FormControl('',[Validators.required, Validators.minLength(4)]),
       gender: new FormControl(null,Validators.required),
-      age:new FormControl('',[Validators.required, FormValidator.ageNotValid]),
+      age:new FormControl('',Validators.required),
       secQuestion : new FormControl('', Validators.required),
       secAnswer : new FormControl('', Validators.required)
     }, {validator: FormValidator.passwordsMustMatch});
@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
 
   submit() {
     let user: User = this.form.value;
-    this.formsService.signup(user, this.isUser).subscribe((res: Response) => {
+    this.forms.signup(user, this.isUser).subscribe((res: Response) => {
         if(res.status) {
           alert('Signup successful!! Now Log in');
         }

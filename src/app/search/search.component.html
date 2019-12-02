@@ -1,0 +1,16 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid">
+    <h1 class="display-4" id="searchtext">Find items</h1>
+
+    <div class="input-group mb-3 lead">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="material-icons">
+            shopping_cart
+          </i></span>
+      </div>
+      <input type="text" id="searchInput" name="searchInput" class="form-control" 
+      placeholder="Search items"
+        aria-label="search" value="" aria-describedby="basic-addon1" (input)="search($event.target.value)">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<app-search ></app-search>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="row">
+            <div class="col-sm-3" *ngFor="let product of products">
+               <app-item-info [product]='product' class="card card-custom"></app-item-info>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>   

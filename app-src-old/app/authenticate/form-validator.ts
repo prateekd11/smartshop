@@ -14,10 +14,4 @@ export class FormValidator {
             return {passwordsMustMatch : true};
         return null;
     }
-
-    static ageNotValid (control: AbstractControl) : ValidationErrors | null {
-        if(control.value< 1 || control.value>99) {
-            return {ageNotValid: true};
-        }
-    }
 }
