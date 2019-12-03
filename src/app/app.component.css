@@ -16,3 +16,7 @@ footer {
       color:#0062cc; 
       background-color: white;;
   }
+
+  .logout{
+      cursor: pointer;
+  }

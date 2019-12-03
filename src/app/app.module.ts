@@ -11,7 +11,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
-import { ItemInfoComponent } from './item-info/item-info.component'
+import { ItemInfoComponent } from './item-info/item-info.component';
+import { EditComponent } from './edit/edit.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ItemInfoComponent } from './item-info/item-info.component'
     CarouselComponent,
     ProductComponent,
     SearchComponent,
-    ItemInfoComponent
+    ItemInfoComponent,
+    EditComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

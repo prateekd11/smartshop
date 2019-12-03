@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { Product } from '../services/Product';
+import { AuthService } from '../authenticate/auth.service';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,8 @@ export class ProductComponent implements OnInit {
   category: string;
   products : Product[] = [];
   //searchValue:string;
-  constructor(private route: ActivatedRoute, private productService: ProductService) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, 
+    private authService:AuthService) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {

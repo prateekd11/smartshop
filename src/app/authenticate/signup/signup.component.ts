@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from '@angular/forms';
 import { FormValidator } from '../form-validator';
-import { FormsService } from 'src/app/services/forms.service';
 import { User } from 'src/app/User';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
   isUser:boolean = false;
   form: FormGroup;
 
-  constructor(formBuilder: FormBuilder, private formsService: FormsService, private route: Router) { 
+  constructor(formBuilder: FormBuilder, private userService: UserService, private route: Router) { 
 
     this.form = formBuilder.group({
       firstName : new FormControl('',[Validators.required, Validators.minLength(2)]),
@@ -58,15 +58,15 @@ export class SignupComponent implements OnInit {
 
   submit() {
     let user: User = this.form.value;
-    this.formsService.signup(user, this.isUser).subscribe((res: Response) => {
-        if(res.status) {
+    this.userService.signup(user, this.isUser).subscribe((res) => {
+        if(res === true) {
           alert('Signup successful!! Now Log in');
         }
-    }, (error: Response) => {
-        if(error.status)
-        alert('Signup failed!! Please try again later.')
+        else {
+          alert('Could not create account! Try later!!');
+        }
+        this.clearForm();
     });
-    this.clearForm();
   }
 
   clearForm() {

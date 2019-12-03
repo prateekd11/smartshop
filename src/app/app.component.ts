@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from './authenticate/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {
   title = 'smartshop';
-
-  constructor(private router: Router) {
+  isLoggedIn : boolean = false;
+  constructor(private authService: AuthService) {
   }
   /*search(value: string) {
     console.log('value to send ',value);

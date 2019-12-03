@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Product } from '../services/Product';
+import { AuthService } from '../authenticate/auth.service';
 
 @Component({
   selector: 'app-item-info',
@@ -12,10 +13,9 @@ import { Product } from '../services/Product';
 export class ItemInfoComponent implements OnInit {
 
   @Input('product') product: Product;
-  isAdmin: boolean = false;
   cartAddedId: number;
 
-  constructor( private router: Router) {
+  constructor( private authService: AuthService) {
 
   }
 

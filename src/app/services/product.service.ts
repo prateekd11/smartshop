@@ -11,10 +11,11 @@ export class ProductService {
   userId="asdf";
   baseUrl : string = environment.baseUrl;
   private subject = new Subject<Product[]>();
+  isAdmin: boolean;
   private userAuthCredentials = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa('user:pwd')
+      'Authorization': 'Basic ' + btoa('asdf:asdf')
     })
   };
   
