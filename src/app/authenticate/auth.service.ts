@@ -54,6 +54,15 @@ export class AuthService {
     return this.http.get<boolean>(this.baseUrl+'/users/approved/'+userId, this.authCredentials);
   }
 
+  getSecurityQuestion(userId):Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl+'/users/resetpassword/'+userId, this.authCredentials);
+  }
+
+  resetPassword(password: string, userId: string){
+    return this.http.post(this.baseUrl+'/users/resetpassword/'+userId+'/'+password,{}, this.authCredentials);
+
+  }
+
   logout() {
     this.loggedInUser = null;
     this.isAdmin = false;

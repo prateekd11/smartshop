@@ -15,7 +15,7 @@ export class ProductService {
   private userAuthCredentials = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa('asdf:asdf')
+      'Authorization': 'Basic ' + btoa('admin:admin')
     })
   };
   

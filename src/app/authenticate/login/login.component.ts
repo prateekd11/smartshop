@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   validCredentials: boolean;
   approved: boolean = false;
   redirect: string;
+  submitted: boolean = false;
   constructor(private formBuilder: FormBuilder, private formsService: FormsService,
     private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -29,13 +30,13 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(param => {
+    /*this.route.queryParamMap.subscribe(param => {
       this.redirect = param.get('from');
     });
     if(this.redirect !== null) {
       console.log(this.redirect);
       this.router.navigate['/'+this.redirect];
-    }
+    }*/
   }
 
   get userId() {
@@ -47,11 +48,12 @@ export class LoginComponent implements OnInit {
   }
 
   async submit() {
+    this.submitted = true;
     await this.authService.isApproved(this.userId.value).toPromise().then(res =>{
        this.approved = res;
     })
     if(this.approved == true) {
-    await this.authService.authenticate(this.form.value.userId, this.form.value.password).toPromise().then(async (res) => {
+    await this.authService.authenticate(this.form.value.userId, this.form.value.password).toPromise().then((res) => {
       this.successLogin = true;
       this.authService.setToken(res.token);
       //this.authService.isAdmin = false;
@@ -69,7 +71,9 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl('');
       this.validCredentials = true;
       this.router.navigate(['']);
-    }, () => { this.successLogin = false; this.validCredentials = false; }
+    }, error => { 
+      this.successLogin = false; 
+      this.validCredentials = false; }
     );
   } else {
     alert('Your account is not yet approved. Please contact admin');
