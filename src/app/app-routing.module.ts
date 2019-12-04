@@ -8,6 +8,9 @@ import { SearchComponent } from './search/search.component';
 import { AuthGuardService } from './auth-guard.service';
 import { EditComponent } from './edit/edit.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { EditOfferComponent } from './edit-offer/edit-offer.component';
+import { OfferComponent } from './offer/offer.component';
+import { Offer } from './Offer';
 
 
 const routes: Routes = [
@@ -15,7 +18,8 @@ const routes: Routes = [
   {path:'register', component:SignupComponent},
   {path:'login', component:LoginComponent},
   {path:'products', component:ProductComponent},
-  {path:'offers', component:LoginComponent},
+  {path:'offers', component:OfferComponent},
+  {path: 'edit-offers', component:EditOfferComponent, canActivate:[AuthGuardService]},
   {path:'search', component:SearchComponent},
   {path:'edit', component:EditComponent, canActivate:[AuthGuardService]},
   {path:'reset-password', component:PasswordResetComponent}

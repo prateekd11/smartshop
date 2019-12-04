@@ -7,7 +7,7 @@
                <app-item-info [product]='product' class="card card-custom"></app-item-info>
             </div>
             <div class="card add-card" *ngIf="authService.isManager" 
-            routerLink="/edit" [queryParams]="{product: product.productName}">
+            routerLink="/edit" [queryParams]="{'product': product.productName}">
                 <img class="card-img-top" 
                 src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" 
                 alt="Card image">

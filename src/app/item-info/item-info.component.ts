@@ -15,7 +15,7 @@ export class ItemInfoComponent implements OnInit {
   @Input('product') product: Product;
   cartAddedId: number;
 
-  constructor( private authService: AuthService) {
+  constructor( public authService: AuthService) {
 
   }
 

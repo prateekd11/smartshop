@@ -13,9 +13,10 @@ export class ProductComponent implements OnInit {
 
   category: string;
   products : Product[] = [];
+  product: Product;
   //searchValue:string;
   constructor(private route: ActivatedRoute, private productService: ProductService, 
-    private authService:AuthService) { }
+    public authService:AuthService) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {
