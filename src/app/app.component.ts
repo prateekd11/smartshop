@@ -10,7 +10,7 @@ import { AuthService } from './authenticate/auth.service';
 export class AppComponent {
   title = 'smartshop';
   isLoggedIn : boolean = false;
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
   }
   /*search(value: string) {
     console.log('value to send ',value);

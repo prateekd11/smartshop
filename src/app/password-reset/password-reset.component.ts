@@ -20,6 +20,8 @@ export class PasswordResetComponent implements OnInit {
   Answer:string;
   resetUser: string;
   answerForm:FormGroup;
+  samePasswordError: boolean;
+  resetRequest: boolean = false;
   constructor(private formBuilder: FormBuilder, private formsService: FormsService,
     private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -70,8 +72,12 @@ export class PasswordResetComponent implements OnInit {
   }
 
   async resetPassword() {
+    this.resetRequest = true;
     await this.authService.resetPassword(this.password.value, this.resetUser).toPromise().then((res) =>{
-       alert('Password changed. Now Login');
+      if(res === true)
+        alert('Password changed. Now Login');
+      else 
+        this.samePasswordError = true;
     }, (error) => {
       alert('Could not reset password');
     });
