@@ -6,14 +6,14 @@
             <div class="col-sm-3" *ngFor="let product of products">
                <app-item-info [product]='product' class="card card-custom"></app-item-info>
             </div>
-            <div class="card add-card" *ngIf="authService.isManager" 
-            routerLink="/edit" [queryParams]="{'product': product.productName}">
+            <div class="card add-card" *ngIf="authService.isManager()" 
+            routerLink="/edit-product">
                 <img class="card-img-top" 
                 src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" 
                 alt="Card image">
                 <div class="card-body" >
                     <h4 class="card-title">Add Product</h4>
-                    <div class="overlay" *ngIf="authService.isManager"></div>
+                    <div class="overlay" *ngIf="authService.isManager()"></div>
                     <img *ngIf="authService.isManager" class="button material-icons" 
                     src="https://www.freepnglogos.com/uploads/plus-icon/plus-icon-plus-math-icon-download-icons-9.png">
                 </div>

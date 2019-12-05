@@ -18,7 +18,7 @@ export class AuthGuardService {
     console.log('URL', state.url);
 
     return Observable.create((observer: Observer<boolean>) => {
-      if (this.authService.loggedIn) {
+      if (this.authService.loggedIn()) {
         console.log('Logged in');
         observer.next(true);
       } else {

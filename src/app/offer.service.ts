@@ -16,7 +16,7 @@ export class OfferService {
     })
   };
   baseUrl:string = environment.baseUrl;
-  private subject = new Subject<Offer[]>();
+  subject = new Subject<Offer[]>();
   constructor(public http: HttpClient) {
    }
 

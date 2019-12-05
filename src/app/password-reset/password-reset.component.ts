@@ -74,6 +74,7 @@ export class PasswordResetComponent implements OnInit {
   async resetPassword() {
     this.resetRequest = true;
     await this.authService.resetPassword(this.password.value, this.resetUser).toPromise().then((res) =>{
+      console.log(res);
       if(res === true)
         alert('Password changed. Now Login');
       else 

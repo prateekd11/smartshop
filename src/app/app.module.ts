@@ -12,7 +12,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
 import { ItemInfoComponent } from './item-info/item-info.component';
-import { EditComponent } from './edit/edit.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { OfferComponent } from './offer/offer.component'
@@ -27,7 +27,7 @@ import { OfferComponent } from './offer/offer.component'
     ProductComponent,
     SearchComponent,
     ItemInfoComponent,
-    EditComponent,
+    EditProductComponent,
     PasswordResetComponent,
     EditOfferComponent,
     OfferComponent

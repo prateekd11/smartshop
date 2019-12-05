@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
+ 
   userId="asdf";
   baseUrl : string = environment.baseUrl;
   private subject = new Subject<Product[]>();
@@ -15,7 +16,7 @@ export class ProductService {
   private userAuthCredentials = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin')
+      'Authorization': 'Basic ' + btoa('asdf:asdf')
     })
   };
   
@@ -36,5 +37,19 @@ export class ProductService {
 
   getAllItems() {
     return this.http.get<Product[]>(this.baseUrl+'/products', this.userAuthCredentials);
+  }
+
+  getProduct(productCode: String) :Observable<Product> {
+    //return this.http.get<Product>(this.baseUrl + '/products/' +productId,this.adminAuthCredentials);
+    return this.http.get<Product>(this.baseUrl+'/products/'+ productCode,this.userAuthCredentials);
+  }
+
+  updateProduct(smartshop:Product) {
+    console.log(smartshop);
+    this.http.put<Product>(this.baseUrl + '/products/', smartshop, this.userAuthCredentials).subscribe((res) => console.log(res))
+  }
+
+  delete(productCode:string):Observable<boolean> {
+    return this.http.delete<boolean>(this.baseUrl+'/products/'+ productCode,this.userAuthCredentials);
   }
 }

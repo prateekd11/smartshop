@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   approved: boolean = false;
   redirect: string;
   submitted: boolean = false;
+  accountExists: boolean = false;
   constructor(private formBuilder: FormBuilder, private formsService: FormsService,
     private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -30,13 +31,11 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    /*this.route.queryParamMap.subscribe(param => {
-      this.redirect = param.get('from');
-    });
-    if(this.redirect !== null) {
-      console.log(this.redirect);
-      this.router.navigate['/'+this.redirect];
-    }*/
+    if(this.authService.getToken() != null) {
+      this.successLogin = true;
+      this.validCredentials= true;
+      console.log('Token is extracted. Token is correct. '+ this.authService.getToken());
+    }
   }
 
   get userId() {
@@ -48,26 +47,18 @@ export class LoginComponent implements OnInit {
   }
 
   async submit() {
-    this.submitted = true;
     await this.authService.isApproved(this.userId.value).toPromise().then(res =>{
-       this.approved = res;
+    this.accountExists = res[0];
+    this.approved = res[1];
+      console.log(this.approved, this.accountExists);
     })
-    if(this.approved == true) {
+    if(this.approved && this.accountExists) {
     await this.authService.authenticate(this.form.value.userId, this.form.value.password).toPromise().then((res) => {
       this.successLogin = true;
       this.authService.setToken(res.token);
-      //this.authService.isAdmin = false;
-      this.authService.loggedIn = true;
+      this.authService.setRole(res.role);
       this.authService.userId = this.userId.value;
-      //this.productService.isLoggedIn = true;
       this.authService.name = this.form.value.username;
-      if (res.role === 'ROLE_ADMIN') {
-        this.authService.isAdmin = true;
-      } else if(res.role === 'ROLE_MANAGER') {
-        this.authService.isManager = true;
-      } else {
-        this.authService.isUser = true;
-      }
       this.router.navigateByUrl('');
       this.validCredentials = true;
       this.router.navigate(['']);
@@ -75,8 +66,11 @@ export class LoginComponent implements OnInit {
       this.successLogin = false; 
       this.validCredentials = false; }
     );
-  } else {
+    this.submitted = true;
+  } else if(!this.approved && this.accountExists) {
     alert('Your account is not yet approved. Please contact admin');
+  } else if(!this.accountExists) {
+    alert('Account wih that user Id does not exists');
   }
 }
 }

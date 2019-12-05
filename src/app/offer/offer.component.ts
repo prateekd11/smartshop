@@ -26,9 +26,10 @@ export class OfferComponent implements OnInit
 
   ngOnInit() {
       this.offerService.getAllOffers()
-      .subscribe((res: any) => { this.Offers = res as Offer[]; });
+      .toPromise().then((res: any) => { this.Offers = res as Offer[];
+      this.offerService.subject.next(res) });
 
-      this.offerService.getSubject().subscribe((data) => {
+      this.offerService.subject.subscribe((data) => {
         this.Offers = data;
       });
   }

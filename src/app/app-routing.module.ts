@@ -6,7 +6,7 @@ import { LoginComponent } from './authenticate/login/login.component';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
 import { AuthGuardService } from './auth-guard.service';
-import { EditComponent } from './edit/edit.component';
+import { EditProductComponent } from './edit-product/edit-product.component'
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { OfferComponent } from './offer/offer.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'offers', component:OfferComponent},
   {path: 'edit-offers', component:EditOfferComponent, canActivate:[AuthGuardService]},
   {path:'search', component:SearchComponent},
-  {path:'edit', component:EditComponent, canActivate:[AuthGuardService]},
+  {path:'edit-product', component:EditProductComponent, canActivate:[AuthGuardService]},
   {path:'reset-password', component:PasswordResetComponent}
 
 ];

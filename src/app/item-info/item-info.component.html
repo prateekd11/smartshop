@@ -46,7 +46,7 @@
   </div>
 </div>
   <div class="overlay" *ngIf="authService.isManager"></div>
-    <i *ngIf="authService.isManager" class="button material-icons" 
-    routerLink="/edit" [queryParams]="{product: product.productName}">
+    <i *ngIf="authService.isManager()" class="button material-icons" 
+    routerLink="/edit-product" [queryParams]="{productCode: product.productCode}">
         create </i>   
 </div>
