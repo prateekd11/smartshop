@@ -1,7 +1,7 @@
 <body>
     <div class="container-fluid">
 
-        <form id="editForm" class="needs-validation" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <form id="editForm" class="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <h3>Edit Item</h3>
             <div class="form-group">
                 <div class="alert alert-info" *ngIf="saved">Item edited successfully.</div>
@@ -91,7 +91,7 @@
                         <option>Grocery</option>
                     </select>
 
-                    <select *ngIf="product.productType =='Books'" id="productType" class="form-control"
+                    <select *ngIf="product.productType =='books'" id="productType" class="form-control"
                         formControlName="productType">
                         <option >Clothing </option>
                         <option selected>Books</option>
@@ -109,7 +109,7 @@
                         <option>Grocery</option>
                     </select>
 
-                    <select *ngIf="product.productType =='Grocery'" id="productType" class="form-control"
+                    <select *ngIf="product.productType =='grocery'" id="productType" class="form-control"
                         formControlName="productType">
                         <option >Clothing </option>
                         <option>Books</option>
@@ -163,15 +163,13 @@
             </div>
 
         <br>
-            <div class="form-row">
-                <div class="col-xs">
-                    <button (click)="delete()" id="button" class="btn btn-danger">Delete</button>
-                </div>
-                <div class="col-xs">
-                    <button type="submit" id="button" class="btn btn-primary" 
-                    [disabled]="editForm.invalid">Save</button>
-                </div>
+            <div class="col-xs">
+                <button type="submit" id="button" class="btn btn-primary" 
+                [disabled]="editForm.invalid">Save</button>
             </div>
         </form>
+        <div class="pt-1 edit-form">
+            <button (click)="delete()" id="button" class="btn btn-danger">Delete</button>
+        </div>
     </div>
 </body>

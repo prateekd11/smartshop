@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Offer } from '../Offer';
 import { AuthService } from '../authenticate/auth.service';
 import { OfferService } from '../offer.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class OfferComponent implements OnInit
   }
   Offers: Offer[];
 
-  constructor(public http: HttpClient, public authService:AuthService, public offerService: OfferService) { }
+  constructor(public http: HttpClient, public authService:AuthService, public offerService: OfferService
+    ,private router: Router) { }
 
   ngOnInit() {
       this.offerService.getAllOffers()
@@ -36,6 +38,7 @@ export class OfferComponent implements OnInit
 
   delete(productCode : String) {
     this.offerService.delete(productCode).subscribe((res: any) => { console.log("Deleted") });
+    this.router.navigate(['/offers'])
   }
 
 }

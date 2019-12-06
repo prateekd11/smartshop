@@ -42,8 +42,9 @@ export class EditProductComponent implements OnInit {
     this.route.queryParamMap.subscribe(params =>{
       this.productService.getProduct(params.get('productCode')).subscribe(
           (f) => {
+            if(f != null) {
             this.product = f ;
-            console.log(this.product.brand)
+            console.log(this.product)
             this.editForm = this.formBuilder.group({
               'productCode' : new FormControl(this.product.productCode,[Validators.required , Validators.maxLength(6)]),
               'productName' : new FormControl (this.product.productName,[Validators.required, Validators.maxLength(200)]),
@@ -56,10 +57,11 @@ export class EditProductComponent implements OnInit {
               'shelf' : new FormControl(this.product.shelf,[Validators.required]),
               'dateOfManf' : new FormControl(this.product.dateOfManf.toString().substring(0,10), [Validators.required,]),
               'dateOfExp' : new FormControl(this.product.dateOfExp.toString().substring(0,10), [Validators.required,]),
-              'productImg': new FormControl(this.product.productImg,[Validators.required]),
-              
-             
+              'productImg': new FormControl(this.product.productImg,[Validators.required]),  
             })
+          } else {
+            return;
+          }
           })
         });
       }
@@ -112,13 +114,16 @@ export class EditProductComponent implements OnInit {
 
     get shelf() { return this.editForm.get('shelf');}
 
-    edit(){
+    delete(){
+      
       this.productService.delete(this.productCode.value).subscribe((res) => {
         if(res) {
           alert('Product deleted succesfully');
+          this.router.navigate(['']);
         }
-      })
-
+      });
+      
+      //TODO router service above is not working
       
     }
 }

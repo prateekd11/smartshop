@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Product } from './Product';
 import { Observable, Subject } from 'rxjs';
+import { Offer } from '../Offer';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,13 @@ export class ProductService {
 
   delete(productCode:string):Observable<boolean> {
     return this.http.delete<boolean>(this.baseUrl+'/products/'+ productCode,this.userAuthCredentials);
+  }
+
+  editOffer(offer: Offer){
+    return this.http.post(this.baseUrl+'/offers',offer,this.userAuthCredentials);
+  }
+
+  getOffer(productCode: string) {
+    return this.http.get(this.baseUrl+'/offers/'+ productCode,this.userAuthCredentials);
   }
 }

@@ -8,9 +8,6 @@
             </div>
             <div class="card add-card" *ngIf="authService.isManager()" 
             routerLink="/edit-product">
-                <img class="card-img-top" 
-                src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" 
-                alt="Card image">
                 <div class="card-body" >
                     <h4 class="card-title">Add Product</h4>
                     <div class="overlay" *ngIf="authService.isManager()"></div>
