@@ -20,3 +20,8 @@ footer {
   .logout{
       cursor: pointer;
   }
+  
+  .material-icons:hover{
+      cursor:pointer;
+    color: gainsboro;
+  }

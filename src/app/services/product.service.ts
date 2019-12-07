@@ -61,4 +61,8 @@ export class ProductService {
   getOffer(productCode: string) {
     return this.http.get(this.baseUrl+'/offers/'+ productCode,this.userAuthCredentials);
   }
+
+  getCarousel(category: string) {
+    return this.http.get(this.baseUrl+'/products/categories/'+category, this.userAuthCredentials);
+  }
 }

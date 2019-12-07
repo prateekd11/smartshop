@@ -120,6 +120,7 @@ export class EditProductComponent implements OnInit {
         if(res) {
           alert('Product deleted succesfully');
           this.router.navigate(['']);
+          console.log('asndlksandlknasd')
         }
       });
       

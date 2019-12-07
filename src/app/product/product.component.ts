@@ -14,6 +14,7 @@ export class ProductComponent implements OnInit {
   category: string;
   products : Product[] = [];
   product: Product;
+  itemName: string;
   //searchValue:string;
   constructor(private route: ActivatedRoute, private productService: ProductService, 
     public authService:AuthService) { }
@@ -21,13 +22,24 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.route.queryParamMap.subscribe(param => {
       this.category = param.get('category');
-      console.log(this.category);
+      this.itemName = param.get('itemName');
+      console.log(this.category, this.itemName);
     });
    // this.route.snapshot.paramMap.get('search');
+   if(this.category != null) {
     this.productService.getProductsByCategory(this.category).subscribe(products => {
       this.products = products;
-      console.log("products ",this.products);
+      console.log("products", products)
+      console.log("this.products ",this.products);
     });
+  }
+  if(this.itemName != null) {
+    this.productService.getAllItems().subscribe(products => {
+      this.products = products.filter((product) => 
+      product.productName.toLowerCase().includes(this.itemName.toLowerCase()));
+    this.productService.getSubject().next(this.products);
+    });
+  }
     this.productService.getSubject().subscribe((data) => {
       this.products = data;
     });
