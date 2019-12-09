@@ -15,7 +15,6 @@ export class AuthService {
   redirectUrl = '/';
   name: string;
   validCredentials: boolean = false;
-  userId: string;
 
   cartMenuItemId: number = 0;
  // isManager: boolean = false;
@@ -86,6 +85,10 @@ export class AuthService {
 
   }
 
+  userId() {
+    return localStorage.getItem('userId');
+  }
+
   loggedIn():boolean{
     if(localStorage.getItem('token')){
       return true;
@@ -97,6 +100,8 @@ export class AuthService {
     this.loggedInUser = null;
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('userId');
     this.router.navigate(['login']);
+
   }
 }

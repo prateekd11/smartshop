@@ -5,7 +5,6 @@
 /tmp
 /out-tsc
 /app-src-old
-/src/assets
 # Only exists if Bazel was run
 /bazel-out
 

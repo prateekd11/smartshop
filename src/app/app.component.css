@@ -25,3 +25,17 @@ footer {
       cursor:pointer;
     color: gainsboro;
   }
+
+  .vertical{
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }
+
+  .nav-item:hover {
+    background-color: #1976d2;
+    border-radius: 10px;
+  }
+
+  .search{
+    margin-right:10px;
+  }

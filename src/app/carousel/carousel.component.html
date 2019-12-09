@@ -1,7 +1,7 @@
 <div >
     <div class="card border-0 rounded-0 text-light app-ht">
         <div class="position-relative">
-            <ngb-carousel #carousel interval="2000" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)">
+            <ngb-carousel #carousel interval="2000" [pauseOnHover]="pauseOnHover">
                 <ng-template ngbSlide *ngFor="let img of images; index as i">
                 <div class="carousel-caption">
                     <h3>{{img.name}}</h3>

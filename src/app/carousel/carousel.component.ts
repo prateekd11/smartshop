@@ -1,22 +1,48 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({selector: 'ngbd-carousel-pause', templateUrl: './carousel.component.html'})
 export class CarouselComponent {
-  images = [{id:1, imageUrl: "https://images.unsplash.com/photo-1524275539700-cf51138f679b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-  name:"Clothing" },
- {id:2, imageUrl:"https://images.unsplash.com/photo-1521341057461-6eb5f40b07ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-  ,name:"Men"},
-  {id: 3, imageUrl: "https://images.unsplash.com/photo-1550614000-4895a10e1bfd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-  , name: "Women"},
-  {id: 4, imageUrl:"https://images.unsplash.com/photo-1569858619542-8f05ef2fbcf0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-  , name:"Children"}];
+ 
+ @Input('category') category:string;
+  images:any;
+  clothing =  [{id:1, imageUrl: "./assets/Clothing3.jpg",name:"Clothing" },
+              {id:2, imageUrl:"./assets/Clothing1.jpg" ,name:"Men"},
+              {id: 3, imageUrl: "./assets/Clothing2.jpg", name: "Women"},
+              {id: 4, imageUrl:"./assets/Clothing4.jpg" , name:"Children"}];
+
+  electronics = [{id:1, imageUrl: "./assets/Electronics1.jpg",name:"Fit bands" },
+                {id:2, imageUrl:"./assets/Electronics2.jpg" ,name:"Laptops"},
+                {id: 3, imageUrl: "./assets/Electronics3.jpg", name: "Headphones"},
+                {id: 4, imageUrl:"./assets/Electronics4.jpg" , name:"Phones"}];
+
+  footwear =    [{id:1, imageUrl: "./assets/Footwear1.jpg",name:"Women" },
+                {id:2, imageUrl:"./assets/Footwear2.jpg" ,name:"Men"},
+                {id: 3, imageUrl: "./assets/Footwear3.jpg", name: "Sport shoes"},
+                {id: 4, imageUrl:"./assets/Footwear4.jpg" , name:"Casuals"}];
+
+  food =        [{id:1, imageUrl: "./assets/Food1.jpg",name:"Bakery" },
+                {id:2, imageUrl:"./assets/Food2.jpg" ,name:"Fast Food"},
+                {id: 3, imageUrl: "./assets/Food3.jpg", name: "Vegetables"},
+                {id: 4, imageUrl:"./assets/Food4.jpg" , name:"Fruits"}];
+                
 
   paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;
   pauseOnHover = true;
+
+  ngOnInit() {
+    if(this.category === 'clothing')
+      this.images = this.clothing;
+    else if (this.category === 'food')
+      this.images = this.food;
+    else if(this.category === 'footwear')
+      this.images = this.footwear;
+    else 
+      this.images = this.electronics;
+  }
 
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
@@ -27,15 +53,5 @@ export class CarouselComponent {
       this.carousel.pause();
     }
     this.paused = !this.paused;
-  }
-
-  onSlide(slideEvent: NgbSlideEvent) {
-    if (this.unpauseOnArrow && slideEvent.paused &&
-      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)) {
-      this.togglePaused();
-    }
-    if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
-      this.togglePaused();
-    }
   }
 }

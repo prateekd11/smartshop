@@ -58,6 +58,7 @@ export class SignupComponent implements OnInit {
 
   submit() {
     let user: User = this.form.value;
+    console.log("this.isUser",this.isUser);
     this.userService.signup(user, this.isUser).subscribe((res) => {
         if(res === true) {
           alert('Signup successful!! Now Log in');

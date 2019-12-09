@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       this.successLogin = true;
       this.authService.setToken(res.token);
       this.authService.setRole(res.role);
-      this.authService.userId = this.userId.value;
+      localStorage.setItem('userId', this.userId.value);
       this.authService.name = this.form.value.username;
       this.router.navigateByUrl('');
       this.validCredentials = true;

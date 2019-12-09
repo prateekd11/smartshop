@@ -159,3 +159,13 @@ ngbd-carousel-pause{
   .shop-text{
     text-align: center;
   }
+
+ .get-started{
+   margin-top:5%;
+ }
+
+ .get-started:hover{
+   background-color:white;
+   color:#0062cc;
+   border: 1px solid #0062cc;
+ }
