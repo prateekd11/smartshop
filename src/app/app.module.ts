@@ -15,7 +15,9 @@ import { ItemInfoComponent } from './item-info/item-info.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
-import { OfferComponent } from './offer/offer.component'
+import { OfferComponent } from './offer/offer.component';
+import { BillingComponent } from './billing/billing.component';
+import { SuperUserComponent } from './super-user/super-user.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { OfferComponent } from './offer/offer.component'
     EditProductComponent,
     PasswordResetComponent,
     EditOfferComponent,
-    OfferComponent
+    OfferComponent,
+    BillingComponent,
+    SuperUserComponent
   ],
   imports: [
     BrowserModule,

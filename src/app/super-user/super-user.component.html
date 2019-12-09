@@ -1,0 +1,79 @@
+<div class="container-fluid " style="background-color: white">
+  <div class="col-md-12 register-right">
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+          aria-selected="true">
+          <h2 class="pending">Pending</h2>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+          aria-selected="false">
+          <h2>Approved</h2>
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <br>
+        <div style="overflow-x:auto;">
+          <table class="table ">
+            <thead>
+              <tr>
+                <th scope="col">MANAGER ID</th>
+                <th scope="col">AGE</th>
+                <th scope="col">GENDER</th>
+                <th scope="col">CONTACT NO</th>
+                <th scope="col">REQUEST</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let manager of managerPending">
+                <td>{{manager.userId}}</td>
+                <td>{{manager.age}}</td>
+                <td>{{manager.gender}}</td>
+                <td>{{manager.contactNumber}}</td>
+                <td><button type="button" (click)="accessChangeEvent(manager.userId)" class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-ok"></span> Accept
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+        <br>
+        <div style="overflow-x:auto;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">MANAGER ID</th>
+                <th scope="col">AGE</th>
+                <th scope="col">GENDER</th>
+                <th scope="col">CONTACT NO</th>
+                <th scope="col">STATUS</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let manager of manager">
+                <td>{{manager.userId}}</td>
+                <td>{{manager.age}}</td>
+                <td>{{manager.gender}}</td>
+                <td>{{manager.contactNumber}}</td>
+                <td> <button type="button" (click)="accessChangeEvent(manager.userId)" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-remove"></span> Revoke Access
+                  </button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

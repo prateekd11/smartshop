@@ -28,15 +28,6 @@ export class SearchComponent implements OnInit {
     this.search(this.itemName);
   })
 
-  //this.searchValue = this.route.snapshot.paramMap.get('search');
-  //console.log(this.searchValue);
-  /*if(this.category !== null) {*/
-    /*this.productService.getProductsByCategory(this.category).subscribe((products) => {
-      this.itemList = products;
-    });
-    this.*/
-   /*  }
-     else {*/
        await this.productService.getAllItems().toPromise().then((products) => {
          this.itemList = products;
          console.log(products);

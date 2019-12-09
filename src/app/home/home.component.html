@@ -2,13 +2,14 @@
 
 <div class="page-header header-filter clear-filter black-filter" data-parallax="true">
     <div class="container">
-          <h1 *ngIf="this.authService.loggedIn()" class="brand"> Hi, {{authService.userId()}} </h1>
-        <div class="row">
+        <div class="row ">
         <div class="col-md-8 ml-auto mr-auto">
             <div class="brand">
+            <h2 *ngIf="this.authService.loggedIn()" class="display-4"><b> 
+                Hi, {{authService.userId()}} </b></h2>
             <h1>Smart Shop</h1>
             <h3> A smart way to shop</h3>
-            <a href="#category-section" class="btn btn-primary get-started">Get Started </a>
+            <a href="#category-section" class="btn get-started">Get Started </a>
             </div>
         </div>
         </div>

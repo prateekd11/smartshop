@@ -11,6 +11,9 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { OfferComponent } from './offer/offer.component';
 import { Offer } from './Offer';
+import { BillingComponent } from './billing/billing.component';
+import { SuperUserComponent } from './super-user/super-user.component';
+import { SuperUserGuardService } from './super-user-guard.service';
 
 
 const routes: Routes = [
@@ -22,7 +25,9 @@ const routes: Routes = [
   {path: 'edit-offers', component:EditOfferComponent, canActivate:[AuthGuardService]},
   {path:'search', component:SearchComponent},
   {path:'edit-product', component:EditProductComponent, canActivate:[AuthGuardService]},
-  {path:'reset-password', component:PasswordResetComponent}
+  {path:'reset-password', component:PasswordResetComponent},
+  {path: 'billing', component:BillingComponent},
+  {path: 'permissions', component:SuperUserComponent, canActivate:[SuperUserGuardService]}
 
 ];
 

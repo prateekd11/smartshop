@@ -1,0 +1,92 @@
+<div class="container-fluid d-flex justify-content-center">
+    <div class="card mt-3 col-sm-6 justify-content-center ">
+        <form [formGroup]="billingForm">
+            <div class="row ml-3 ">
+                <div class="col-lg-4" id="userId">
+                    <label for="inputName" class="control-label mt-3">
+                        <strong>User Id</strong>
+                    </label>
+                    <input formControlName="userId" type="text" class="form-control" (blur)="checkUser()">
+                    <div class="alert alert-danger" *ngIf="billingForm.get('userId').touched && 
+                    billingForm.get('userId').invalid">
+                        UserId is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ml-3">
+                <div class="col-lg-4">
+                    <label for="inputName" class="control-label mt-3">
+                        <strong>Product Code</strong>
+                    </label>
+                    <input formControlName="productCode" type="text" class="form-control">
+                    <div class="alert alert-danger" *ngIf="billingForm.get('productCode').touched && 
+                    billingForm.get('productCode').invalid">
+                        Enter Valid Product Code
+                    </div>
+                </div>
+
+                <div class="col-lg-4 ">
+                    <label for="inputName" class="control-label mt-3">
+                        <strong>Product Quantity</strong>
+                    </label>
+                    <input min="1" formControlName="productQuantity" type="number" class="form-control">
+                    <div class="alert alert-danger" *ngIf="billingForm.get('productQuantity').touched && 
+                    billingForm.get('productQuantity').invalid">
+                        Enter Valid Quantity
+                    </div>
+                </div>
+
+                <div class="col-lg-4 addButton">
+                    <button [disabled]="productCode.invalid || productQuantity.invalid" (click)="addToBill()" class="btn btn-primary button 
+                    mt-3 w-100">Add</button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h2 class="text-center">Billed Items</h2>
+
+                <div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="">
+                                <b> User ID : &nbsp;{{currentUser}} </b> </div>
+                        </div>
+                    </div>
+
+                    <table class="table col-sm-12">
+                        <thead class="thead-blue">
+                            <tr>
+                                <th>Product Code</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let purchase of allPurchase">
+                                <td>{{purchase.productName}}</td>
+                                <td>{{purchase.quantity}}</td>
+                                <td>{{purchase.amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <label class="ml-10">Reward Points: {{Reward}}</label>
+                        <br>
+                            <input type="checkbox" class="btn" (change)="UseReward($event)" Value="true">
+                             &nbsp;Redeem Reward Points
+                        <br>
+                        <br>
+                        <h4 id="total" class="col-sm-12 p-2 text-white text-center button">Grand Total: {{Total}}</h4>
+                        <br>
+                        <div class="text-center">
+                            <button   (click)="addToPurchase()" class="btn button text-white ml-auto mr-0 text-right">Finish</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
