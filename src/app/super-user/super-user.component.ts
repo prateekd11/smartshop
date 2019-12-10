@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { managers } from './managers';
 import { environment } from 'src/environments/environment';
+import { SuperUserService } from '../super-user.service';
 
 @Component({
   selector: 'app-super-user',
@@ -10,28 +11,31 @@ import { environment } from 'src/environments/environment';
 })
 export class SuperUserComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
-  private userAuthCredential = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + btoa('prateekd11:prateekd11')
-    })
-  }
+  constructor(private http: HttpClient, private superUserService: SuperUserService) { }
+  
   managerPending : managers[];
   manager :managers[];
 
 
   ngOnInit() {
-    this.http.get(`${environment.baseUrl}/users/managers/approved`, this.userAuthCredential)
-      .subscribe((res:  managers[]) => { this.manager = res as managers[];} );
     
-    this.http.get(`${environment.baseUrl}/users/managers/pending`, this.userAuthCredential)
-     .subscribe((obj:  managers[]) => { this.managerPending = obj as managers[];  }  );  
+    this.superUserService.getAllApproved()
+    .subscribe((res:  managers[]) => { this.manager = res as managers[];} );
+    
+    this.superUserService.getAllPending()
+    .subscribe((obj:  managers[]) => { this.managerPending = obj as managers[];  }  );  
+
+    this.superUserService.approvedManagers$.subscribe((approved) => {
+      this.manager = approved;
+    })
+
+    this.superUserService.pendingManagers$.subscribe((pending) => {
+      this.managerPending = pending;
+    })
   }
 
-  accessChangeEvent(UserId : string) {
-    this.http.put(`${environment.baseUrl}/users/managers/${UserId}`,null,this.userAuthCredential)
-    .subscribe( (res) => console.log("changed"));
+  accessChangeEvent(userId : string) {
+    this.superUserService.updateAccess(userId);
   }
 
 }

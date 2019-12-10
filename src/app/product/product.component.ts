@@ -15,7 +15,8 @@ export class ProductComponent implements OnInit {
   products : Product[] = [];
   product: Product;
   itemName: string;
-  //searchValue:string;
+  selectedLevel:string = 'name';
+  
   constructor(private route: ActivatedRoute, private productService: ProductService, 
     public authService:AuthService) { }
 
@@ -23,27 +24,37 @@ export class ProductComponent implements OnInit {
     this.route.queryParamMap.subscribe(param => {
       this.category = param.get('category');
       this.itemName = param.get('itemName');
-      console.log(this.category, this.itemName);
     });
-   // this.route.snapshot.paramMap.get('search');
+
    if(this.category != null) {
-    this.productService.getProductsByCategory(this.category).subscribe(products => {
+     //Shop by category functionality
+    this.productService.getProductsByCategory(this.category, 'name').subscribe(products => {
       this.products = products;
-      console.log("products", products)
-      console.log("this.products ",this.products);
     });
   }
+
   if(this.itemName != null) {
+    //Quick search functionality
     this.productService.getAllItems().subscribe(products => {
       this.products = products.filter((product) => 
       product.productName.toLowerCase().includes(this.itemName.toLowerCase()));
-    this.productService.getSubject().next(this.products);
     });
+
   }
-    this.productService.getSubject().subscribe((data) => {
+
+  this.productService.getSubject().subscribe((data) => {
+    this.products = data;
+  });
+  
+    this.productService.products$.subscribe((data) => {
       this.products = data;
     });
    
+  }
+
+  selected(){
+    this.productService.getSortedProducts(this.category, this.selectedLevel);
+
   }
 
 }

@@ -14,6 +14,7 @@ import { Offer } from './Offer';
 import { BillingComponent } from './billing/billing.component';
 import { SuperUserComponent } from './super-user/super-user.component';
 import { SuperUserGuardService } from './super-user-guard.service';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path:'edit-product', component:EditProductComponent, canActivate:[AuthGuardService]},
   {path:'reset-password', component:PasswordResetComponent},
   {path: 'billing', component:BillingComponent},
-  {path: 'permissions', component:SuperUserComponent, canActivate:[SuperUserGuardService]}
+  {path: 'permissions', component:SuperUserComponent, canActivate:[SuperUserGuardService]},
+  {path: 'purchases', component:PurchaseHistoryComponent, canActivate:[AuthGuardService]}
 
 ];
 

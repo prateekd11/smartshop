@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
       password : new FormControl('',[Validators.required, Validators.minLength(4)]),
       confirmPassword : new FormControl('',[Validators.required, Validators.minLength(4)]),
       gender: new FormControl(null,Validators.required),
-      age:new FormControl('',[Validators.required, FormValidator.ageNotValid]),
+      age:new FormControl('',[Validators.required, FormValidator.ageNotValid, FormValidator.invalidPhone]),
       secQuestion : new FormControl('', Validators.required),
       secAnswer : new FormControl('', Validators.required)
     }, {validator: FormValidator.passwordsMustMatch});

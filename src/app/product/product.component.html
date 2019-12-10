@@ -1,5 +1,14 @@
 <app-search ></app-search>
 <div class="container-fluid">
+    <div class="row sort-select">
+        <select [(ngModel)]="selectedLevel" (change)="selected()" class="form-control">
+            <option value="name" selected>Sort by Name</option>
+            <option value="price">Sort by Price</option>
+            <option value="popularity">Sort by Popularity</option>
+            <option value="availability">Sort by Availability</option>
+        </select>
+    </div>
+    <br/><br/>
     <div class="row">
         <div class="col-md-12 ">
             <div class="row">

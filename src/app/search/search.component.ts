@@ -39,7 +39,6 @@ export class SearchComponent implements OnInit {
 
 
   search(value: string) {
-    console.log("calling search")
     this.searchedItemList = this.itemList.filter((product) => 
       product.productName.toLowerCase().includes(value.toLowerCase()));
     this.productService.getSubject().next(this.searchedItemList);

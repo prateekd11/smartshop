@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Offer } from './Offer';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,9 @@ export class OfferService {
     })
   };
   baseUrl:string = environment.baseUrl;
+  private updatedOfferList: BehaviorSubject<Offer[]> = new BehaviorSubject<Offer[]>([]);
   subject = new Subject<Offer[]>();
+  updatedList$: Observable<Offer[]> = this.updatedOfferList.asObservable();
   constructor(public http: HttpClient) {
    }
 
@@ -29,7 +31,12 @@ export class OfferService {
    }
 
    delete(productCode) {
-    return this.http.delete(this.baseUrl+'/offers/'+productCode ,this.userAuthCredentials);
+    this.http.delete(this.baseUrl+'/offers/'+productCode ,this.userAuthCredentials)
+    .toPromise().then((res: any) => {  
+      this.getAllOffers().toPromise().then((offers) => {
+        this.updatedOfferList.next(offers);
+      }) 
+    });
    }
 
    getOfferByProductCode(productCode) {

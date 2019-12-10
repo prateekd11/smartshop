@@ -177,3 +177,8 @@ nav {
     background: rgba(0, 0, 0, .3);
     color:white;
   }
+
+  .vertical{
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }

@@ -20,4 +20,12 @@ export class FormValidator {
             return {ageNotValid: true};
         }
     }
+
+    static invalidPhone(control: AbstractControl) : ValidationErrors | null {
+        let phone: string = control.value;
+        if(phone.length < 10 || phone.length >10){
+            return {invalidPhone:true};
+        }
+        return null;
+    }
 }

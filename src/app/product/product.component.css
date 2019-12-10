@@ -78,3 +78,8 @@
       width:370px;
     }
   }
+
+  .sort-select{
+    float:right;
+    margin-right:20px;
+  }

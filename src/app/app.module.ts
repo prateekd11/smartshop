@@ -17,7 +17,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { OfferComponent } from './offer/offer.component';
 import { BillingComponent } from './billing/billing.component';
-import { SuperUserComponent } from './super-user/super-user.component'
+import { SuperUserComponent } from './super-user/super-user.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SuperUserComponent } from './super-user/super-user.component'
     EditOfferComponent,
     OfferComponent,
     BillingComponent,
-    SuperUserComponent
+    SuperUserComponent,
+    PurchaseHistoryComponent
   ],
   imports: [
     BrowserModule,

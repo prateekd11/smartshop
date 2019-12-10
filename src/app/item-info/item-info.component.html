@@ -40,10 +40,12 @@
         dashboard
       </i>
       <span class="badge badge-info ">{{product.shelf | titlecase}} Shelf</span>
-
     </div>
-
   </div>
+  <div class="alert alert-info text-center" *ngIf="newProduct(product)"> 
+    <i class="material-icons vertical">new_releases </i> Recently Added </div>
+
+  <div class="alert alert-light text-white" *ngIf="!newProduct(product)">.</div>
 </div>
   <div class="overlay" *ngIf="authService.isManager"></div>
     <i *ngIf="authService.isManager()" class="button material-icons" 

@@ -31,13 +31,13 @@ export class OfferComponent implements OnInit
       .toPromise().then((res: any) => { this.Offers = res as Offer[];
       this.offerService.subject.next(res) });
 
-      this.offerService.subject.subscribe((data) => {
+      this.offerService.updatedList$.subscribe((data) => {
         this.Offers = data;
       });
   }
 
   delete(productCode : String) {
-    this.offerService.delete(productCode).subscribe((res: any) => { console.log("Deleted") });
+    this.offerService.delete(productCode);
     this.router.navigate(['/offers'])
   }
 

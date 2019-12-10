@@ -56,11 +56,13 @@ export class BillingComponent implements OnInit {
         this.userId.reset();
       }
       else{
+        console.log('else part userId'+this.currentUser);
         this.currentUser = this.userId.value;
         document.getElementById('userId').hidden = true;
       }
 
       if (this.Reward === 0) {
+        console.log('else part userId'+this.currentUser);
         this.http.get(`${environment.baseUrl}/reward/${this.currentUser}`, this.userAuthCredential)
           .subscribe((res: any) => { this.Reward = res as number; this.Reward1 = res as number;})
       }
@@ -73,7 +75,7 @@ export class BillingComponent implements OnInit {
     this.Purchase = new purchase();
     this.Purchase.productCode = this.billingForm.value['productCode'];
     this.Purchase.quantity = this.billingForm.value['productQuantity'];
-    this.Purchase.userId = this.billingForm.value['userId'];
+    this.Purchase.userId = this.currentUser;
 
       this.http.get(`${environment.baseUrl}/products/${this.Purchase.productCode}`, this.userAuthCredential)
       .subscribe((res: any) => {
@@ -129,6 +131,7 @@ export class BillingComponent implements OnInit {
   }
   
   addToPurchase() {
+    console.log(this.allPurchase[0].userId);
     this.http.post(`${environment.baseUrl}/purchase`, this.allPurchase ,this.userAuthCredential)
     .subscribe((res: any) => { console.log("Success");
       this.newReward = 0;
