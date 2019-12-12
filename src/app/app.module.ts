@@ -18,7 +18,8 @@ import { EditOfferComponent } from './edit-offer/edit-offer.component';
 import { OfferComponent } from './offer/offer.component';
 import { BillingComponent } from './billing/billing.component';
 import { SuperUserComponent } from './super-user/super-user.component';
-import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component'
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { FeedbackComponent } from './feedback/feedback.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PurchaseHistoryComponent } from './purchase-history/purchase-history.co
     OfferComponent,
     BillingComponent,
     SuperUserComponent,
-    PurchaseHistoryComponent
+    PurchaseHistoryComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   redirect: string;
   submitted: boolean = false;
   accountExists: boolean = false;
+  loading: boolean = false;
   constructor(private formBuilder: FormBuilder, private formsService: FormsService,
     private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   async submit() {
+    this.loading = true;
     await this.authService.isApproved(this.userId.value).toPromise().then(res =>{
     this.accountExists = res[0];
     this.approved = res[1];
@@ -52,6 +54,7 @@ export class LoginComponent implements OnInit {
     })
     if(this.approved && this.accountExists) {
     await this.authService.authenticate(this.form.value.userId, this.form.value.password).toPromise().then((res) => {
+     this.loading = false;
       this.successLogin = true;
       this.authService.setToken(res.token);
       this.authService.setRole(res.role);
@@ -66,9 +69,12 @@ export class LoginComponent implements OnInit {
     );
     this.submitted = true;
   } else if(!this.approved && this.accountExists) {
+    this.loading = false;
     alert('Your account is not yet approved. Please contact admin');
   } else if(!this.accountExists) {
+    this.loading = false;
     alert('Account wih that user Id does not exists');
+
   }
 }
 }

@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class OfferComponent implements OnInit 
 {
 
+  loading:boolean = false;
   private userAuthCredential = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -27,8 +28,11 @@ export class OfferComponent implements OnInit
     ,private router: Router) { }
 
   ngOnInit() {
+      this.loading = true;
       this.offerService.getAllOffers()
-      .toPromise().then((res: any) => { this.Offers = res as Offer[];
+      .toPromise().then((res: any) => { 
+        this.loading = false;
+        this.Offers = res as Offer[];
       this.offerService.subject.next(res) });
 
       this.offerService.updatedList$.subscribe((data) => {
@@ -37,7 +41,9 @@ export class OfferComponent implements OnInit
   }
 
   delete(productCode : String) {
+    this.loading = true;
     this.offerService.delete(productCode);
+    this.loading = false;
     this.router.navigate(['/offers'])
   }
 

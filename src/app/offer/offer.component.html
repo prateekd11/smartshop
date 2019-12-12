@@ -1,6 +1,7 @@
 <body>
     <div class="container">
-        <div class="card col-md-7 col-lg-10  offset-1 mt-5">
+        <img src="./assets/loading.gif" *ngIf="loading" class="loading">
+        <div class="card col-md-7 col-lg-10  offset-1 mt-5" *ngIf="!loading">
             <div class="row">
                 <table class="table " [class.table-hover]="authService.isManager">
                     <thead class="thead-blue">

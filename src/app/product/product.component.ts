@@ -16,11 +16,12 @@ export class ProductComponent implements OnInit {
   product: Product;
   itemName: string;
   selectedLevel:string = 'name';
-  
-  constructor(private route: ActivatedRoute, private productService: ProductService, 
+  loading:boolean = false;
+  constructor(private route: ActivatedRoute, public productService: ProductService, 
     public authService:AuthService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.route.queryParamMap.subscribe(param => {
       this.category = param.get('category');
       this.itemName = param.get('itemName');
@@ -29,32 +30,47 @@ export class ProductComponent implements OnInit {
    if(this.category != null) {
      //Shop by category functionality
     this.productService.getProductsByCategory(this.category, 'name').subscribe(products => {
+      this.loading = false;
       this.products = products;
+      if(this.products.length > 0){
+        this.productService.notFound = false;
+      }
     });
   }
 
   if(this.itemName != null) {
     //Quick search functionality
     this.productService.getAllItems().subscribe(products => {
+      this.loading = false;
       this.products = products.filter((product) => 
       product.productName.toLowerCase().includes(this.itemName.toLowerCase()));
+      if(this.products.length > 0){
+        this.productService.notFound = false;
+      }
     });
 
   }
 
   this.productService.getSubject().subscribe((data) => {
     this.products = data;
+    if(this.products.length > 0){
+      this.productService.notFound = false;
+    }
   });
   
     this.productService.products$.subscribe((data) => {
       this.products = data;
+      if(this.products.length > 0){
+        this.productService.notFound = false;
+      }
     });
+
    
   }
 
   selected(){
-    this.productService.getSortedProducts(this.category, this.selectedLevel);
-
+    if(this.selectedLevel != null || this.selectedLevel !='')
+      this.productService.getSortedProducts(this.category, this.selectedLevel);
   }
 
 }

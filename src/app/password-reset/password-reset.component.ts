@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 import { FormsService } from '../services/forms.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../authenticate/auth.service';
-import { FormValidator } from 'app-src-old/app/authenticate/form-validator';
+import { FormValidator } from '../authenticate/form-validator';
 
 @Component({
   selector: 'app-password-reset',
@@ -11,7 +11,7 @@ import { FormValidator } from 'app-src-old/app/authenticate/form-validator';
   styleUrls: ['./password-reset.component.css']
 })
 export class PasswordResetComponent implements OnInit {
-
+  
   form:FormGroup;
   resetForm: FormGroup;
   hasQuestion:boolean = false;

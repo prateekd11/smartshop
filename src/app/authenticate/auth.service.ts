@@ -19,7 +19,6 @@ export class AuthService {
   cartMenuItemId: number = 0;
  // isManager: boolean = false;
   isUser: boolean = false;
-
   constructor(private productService: ProductService, public router: Router, private http: HttpClient) { 
 
   }

@@ -20,13 +20,21 @@
       <p class="card-subtitle text-muted" id="date">{{product.dateOfManf | date:'dd/MM/yyyy'}}</p>
     </div>
 
-    <div class="col mr-auto text-right float-right" >
+    <div class="col mr-auto text-right float-right" *ngIf="(product.productType == 'Food') ">
       <i class="material-icons" id="launchicon">
         loyalty
       </i>
       <p class="card-subtitle text-muted" id="launch">{{product.brand}}</p>
       <p class="card-subtitle text-muted" id="date">Date of Expiry {{product.dateOfExp | date:'dd/MM/yyyy'}}</p>
     </div>
+
+    <div class="col mr-auto text-right float-right" *ngIf="!(product.productType === 'Food')">
+        <i class="material-icons" id="launchicon">
+          loyalty
+        </i>
+        <p class="card-subtitle text-muted" id="launch">{{product.brand}}</p>
+        <p class="card-subtitle text-muted" id="date">Date Added {{product.addDate | date:'dd/MM/yyyy'}}</p>
+      </div>
     <br>
   </div>
 

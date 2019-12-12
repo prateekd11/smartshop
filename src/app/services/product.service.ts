@@ -19,6 +19,7 @@ export class ProductService {
   searched$:  Observable<Product[]> = this.searchedProductsList.asObservable();
   subject = new Subject<Product[]>();
   isAdmin: boolean;
+  notFound: boolean = false;
   private userAuthCredentials = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

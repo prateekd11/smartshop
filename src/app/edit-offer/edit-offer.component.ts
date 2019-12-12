@@ -15,6 +15,7 @@ export class EditOfferComponent implements OnInit {
 
   offer: Offer;
   productCode: string;
+  loading:boolean = false;
   private userAuthCredential = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -35,33 +36,42 @@ export class EditOfferComponent implements OnInit {
   }
 
   async ngOnInit() {
-   
+    this.loading = true;
     this.route.queryParamMap.subscribe(params => {
-      this.productCode = params.get('id')
-      console.log(this.productCode);
+      this.productCode = params.get('id');
     });
     if(!(typeof this.productCode === "undefined"))
     {
       
     await this.productService.getOffer(this.productCode)
       .toPromise().then((res: Offer) => { 
+        this.loading = false;
+        this.offer = res as Offer; 
         
-        console.log(res);
-        this.offer = res as Offer; });
+      });
     }
-
+    if(this.offer === null) {
+      this.editOfferForm = new FormGroup({
+        'offerDate' : new FormControl(null, [Validators.required]),
+        'productCode' : new FormControl('', [Validators.required, Validators.maxLength(6)]),
+        'discountedRate' : new FormControl('', [Validators.required]),
+        'offerName' : new FormControl('', [Validators.required,Validators.maxLength(200)])
+    });
+    } else {
     this.editOfferForm = new FormGroup({
       'offerDate' : new FormControl(this.offer.offerDate.toString().substring(0,10), [Validators.required]),
       'productCode' : new FormControl(this.offer.productCode, [Validators.required, Validators.maxLength(6)]),
       'discountedRate' : new FormControl(this.offer.discountedRate, [Validators.required]),
       'offerName' : new FormControl(this.offer.offerName, [Validators.required,Validators.maxLength(200)])
   });
+}
   }
 
   editOffer() {
+    this.loading = true;
     this.offer = this.editOfferForm.value;
     this.productService.editOffer(this.offer)
-      .subscribe((res: any) => { console.log("Edited") });
+      .subscribe((res: any) => { this.loading = false; });
   }
 
  

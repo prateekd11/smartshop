@@ -127,4 +127,12 @@ export class EditProductComponent implements OnInit {
       //TODO router service above is not working
       
     }
+
+    newProduct(product: Product){
+     
+      if(product === null) {
+        return true;
+      }
+      return false;
+    }
 }

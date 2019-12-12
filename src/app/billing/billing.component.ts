@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { element } from '../../../node_modules/protractor';
 import { BillingService } from './billing.service';
 import { Router } from '@angular/router';
+import { FormValidator } from '../authenticate/form-validator'
 
 @Component({
   selector: 'app-billing',
@@ -24,7 +25,7 @@ export class BillingComponent implements OnInit {
   public billingForm = new FormGroup({
     'userId': new FormControl('', [Validators.required, Validators.minLength(4)]),
     'productCode': new FormControl('', [Validators.required]),
-    'productQuantity': new FormControl('', [Validators.required])
+    'productQuantity': new FormControl('', [Validators.required,FormValidator.quantityNotValid])
   });
 
 

@@ -10,9 +10,6 @@ footer {
     padding-left: 8px;
     color: white;
     background-color: #0062cc;
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
   }
 
@@ -44,6 +41,6 @@ footer {
     margin-right:10px;
   }
 
-  .footer {
-    
+  .app-container-div{
+    min-height: 550px;
   }

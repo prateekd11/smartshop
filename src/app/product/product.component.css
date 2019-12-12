@@ -81,5 +81,14 @@
 
   .sort-select{
     float:right;
-    margin-right:20px;
+    margin-left:20px;
   }
+
+  .loading{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width:150px;
+    height: 150px;
+}

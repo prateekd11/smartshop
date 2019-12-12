@@ -21,7 +21,7 @@ export class ItemInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-   // this.isAdmin = this.foodService.isAdmin;
+   console.log(this.product.productType);
   }
 
   newProduct(product: Product) {

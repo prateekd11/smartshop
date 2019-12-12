@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './authenticate/auth.service';
 
@@ -8,12 +8,18 @@ import { AuthService } from './authenticate/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild('itemName',null) itemName: ElementRef;
   isLoggedIn : boolean = false;
+  validSearch:boolean = false;
   constructor(public authService: AuthService, private router: Router) {
   }
 
-  search(itemName: string) {
-
-    this.router.navigate(['products'], { queryParams: { 'itemName': itemName } });
+  search(itemName: HTMLInputElement) {
+    let searchName = itemName.value;
+    this.itemName.nativeElement.value='';
+    if(searchName === '' || searchName == null){
+      return;
+    }
+    this.router.navigate(['products'], { queryParams: { 'itemName': searchName } });
   }
 }

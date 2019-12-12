@@ -15,6 +15,7 @@ import { BillingComponent } from './billing/billing.component';
 import { SuperUserComponent } from './super-user/super-user.component';
 import { SuperUserGuardService } from './super-user-guard.service';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path:'reset-password', component:PasswordResetComponent},
   {path: 'billing', component:BillingComponent},
   {path: 'permissions', component:SuperUserComponent, canActivate:[SuperUserGuardService]},
-  {path: 'purchases', component:PurchaseHistoryComponent, canActivate:[AuthGuardService]}
+  {path: 'purchases', component:PurchaseHistoryComponent, canActivate:[AuthGuardService]},
+  {path: 'feedback', component:FeedbackComponent,canActivate:[AuthGuardService]}
 
 ];
 
