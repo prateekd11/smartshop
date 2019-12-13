@@ -52,11 +52,11 @@ export class PasswordResetComponent implements OnInit {
   getSecurityQuestion() {
     console.log('start of method');
     this.resetUser = this.userId.value;
+    console.log(this.resetUser);
     this.authService.getSecurityQuestion(this.userId.value).subscribe((res) => {
       this.secQuestion = res[0];
       this.Answer = res[1];
       this.hasQuestion = true;
-      console.log(this.secQuestion, this.secAnswer, this.hasQuestion);
     }, error => {
       alert('UserId not found in database');
     });
@@ -67,7 +67,7 @@ export class PasswordResetComponent implements OnInit {
       this.answer = true;
       this.hasQuestion = false;
     } else {
-      alert('Invalid answer');
+      alert('Incorrect answer');
     }
   }
 

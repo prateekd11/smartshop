@@ -98,7 +98,8 @@
                                         <span>Female </span> 
                                     </label> &nbsp;
                                     <label for="age">Age:</label>&nbsp;&nbsp;
-                                    <input type="number" min="1" max="99" id="age" formControlName="age">
+                                    <input type="number" min="1" max="99" id="age" formControlName="age"
+                                    (keypress)="keyPress($event)" minlength=1 maxlength=2>
                                     <div class="alert alert-danger"*ngIf="age.touched && age.invalid">
                                         <div *ngIf="age.errors?.required">Age is required</div>
                                         <div *ngIf="age.errors?.ageNotValid">Age is not valid</div>
