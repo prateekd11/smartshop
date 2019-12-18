@@ -20,13 +20,21 @@
       <p class="card-subtitle text-muted" id="date">{{product.dateOfManf | date:'dd/MM/yyyy'}}</p>
     </div>
 
-    <div class="col mr-auto text-right float-right" >
+    <div class="col mr-auto text-right float-right" *ngIf="(product.productType == 'Food') ">
       <i class="material-icons" id="launchicon">
         loyalty
       </i>
       <p class="card-subtitle text-muted" id="launch">{{product.brand}}</p>
       <p class="card-subtitle text-muted" id="date">Date of Expiry {{product.dateOfExp | date:'dd/MM/yyyy'}}</p>
     </div>
+
+    <div class="col mr-auto text-right float-right" *ngIf="!(product.productType === 'Food')">
+        <i class="material-icons" id="launchicon">
+          loyalty
+        </i>
+        <p class="card-subtitle text-muted" id="launch">{{product.brand}}</p>
+        <p class="card-subtitle text-muted" id="date">Date Added {{product.addDate | date:'dd/MM/yyyy'}}</p>
+      </div>
     <br>
   </div>
 
@@ -40,13 +48,15 @@
         dashboard
       </i>
       <span class="badge badge-info ">{{product.shelf | titlecase}} Shelf</span>
-
     </div>
-
   </div>
+  <div class="alert alert-info text-center" *ngIf="newProduct(product)"> 
+    <i class="material-icons vertical">new_releases </i> Recently Added </div>
+
+  <div class="alert alert-light text-white" *ngIf="!newProduct(product)">.</div>
 </div>
   <div class="overlay" *ngIf="authService.isManager"></div>
-    <i *ngIf="authService.isManager" class="button material-icons" 
-    routerLink="/edit" [queryParams]="{product: product.productName}">
+    <i *ngIf="authService.isManager()" class="button material-icons" 
+    routerLink="/edit-product" [queryParams]="{productCode: product.productCode}">
         create </i>   
 </div>

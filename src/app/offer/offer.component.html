@@ -1,0 +1,37 @@
+<body>
+    <div class="container">
+        <img src="./assets/loading.gif" *ngIf="loading" class="loading">
+        <div class="card col-md-7 col-lg-10  offset-1 mt-5" *ngIf="!loading">
+            <div class="row">
+                <table class="table " [class.table-hover]="authService.isManager">
+                    <thead class="thead-blue">
+                    <tr>
+                        <th class="border-0 text-uppercase small font-weight-bold" *ngIf="authService.isManager()"></th>
+                        <th class="border-0 text-uppercase small font-weight-bold">Offer Name </th>
+                        <th class="border-0 text-uppercase small font-weight-bold">Offer Date</th>
+                        <th class="border-0 text-uppercase small font-weight-bold">Product Code</th>
+                        <th class="border-0 text-uppercase small font-weight-bold">Discounted Price</th>
+                        <th class="border-0 text-uppercase small font-weight-bold" *ngIf="authService.isManager()"></th>
+                    </tr>
+                </thead>
+                    <tr *ngFor="let offer of Offers">
+                        <td *ngIf="authService.isManager()">
+                            <i routerLink="/edit-offers" [queryParams]="{id : offer.productCode}" class="material-icons create">
+                                create</i>
+                        </td>
+                        <td>{{offer.offerName}}</td>
+                        <td class="text-center">{{offer.offerDate | date:'dd/MM/yyyy'}}</td>
+                        <td class="text-center">{{offer.productCode}}</td>
+                        <td class="text-center">{{offer.discountedRate}}</td>
+                        <td *ngIf="authService.isManager()"><i (click)="delete(offer.productCode)" class="material-icons delete_forever"
+                            >delete_outline</i></td>
+                    </tr>
+                </table>
+                <hr/>
+            </div>
+            <button routerLink="/edit-offers" class="btn" *ngIf="authService.isManager()">Add offer</button>
+        </div>
+    </div>
+
+
+    <!--*ngIf="authService.isManager"-->

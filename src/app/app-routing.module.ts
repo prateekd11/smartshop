@@ -6,8 +6,16 @@ import { LoginComponent } from './authenticate/login/login.component';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
 import { AuthGuardService } from './auth-guard.service';
-import { EditComponent } from './edit/edit.component';
+import { EditProductComponent } from './edit-product/edit-product.component'
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { EditOfferComponent } from './edit-offer/edit-offer.component';
+import { OfferComponent } from './offer/offer.component';
+import { Offer } from './Offer';
+import { BillingComponent } from './billing/billing.component';
+import { SuperUserComponent } from './super-user/super-user.component';
+import { SuperUserGuardService } from './super-user-guard.service';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 const routes: Routes = [
@@ -15,10 +23,15 @@ const routes: Routes = [
   {path:'register', component:SignupComponent},
   {path:'login', component:LoginComponent},
   {path:'products', component:ProductComponent},
-  {path:'offers', component:LoginComponent},
+  {path:'offers', component:OfferComponent},
+  {path: 'edit-offers', component:EditOfferComponent, canActivate:[AuthGuardService]},
   {path:'search', component:SearchComponent},
-  {path:'edit', component:EditComponent, canActivate:[AuthGuardService]},
-  {path:'reset-password', component:PasswordResetComponent}
+  {path:'edit-product', component:EditProductComponent, canActivate:[AuthGuardService]},
+  {path:'reset-password', component:PasswordResetComponent},
+  {path: 'billing', component:BillingComponent},
+  {path: 'permissions', component:SuperUserComponent, canActivate:[SuperUserGuardService]},
+  {path: 'purchases', component:PurchaseHistoryComponent, canActivate:[AuthGuardService]},
+  {path: 'feedback', component:FeedbackComponent,canActivate:[AuthGuardService]}
 
 ];
 

@@ -1,0 +1,23 @@
+<div class="container">
+
+<div class="row">
+<table class="col-lg-6 offset-lg-3 table mt-5">
+    <thead class="thead-blue">
+      <tr>
+        <th scope="col">Purchase Date</th>
+        <th scope="col">Product Code</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let purchase of allPurchase">
+        <td>{{purchase.purchaseDate | date : 'dd/MM/yyyy' }}</td>
+        <td>{{purchase.productCode}}</td>
+        <td>{{purchase.quantity}}</td>
+        <td>{{purchase.amount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

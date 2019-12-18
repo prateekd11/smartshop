@@ -1,0 +1,163 @@
+<body>
+    <div class="container-fluid">
+
+        <form id="editForm" class="edit-form" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <h3>Edit Item</h3>
+            <div class="form-group">
+                <div class="alert alert-info" *ngIf="saved">Item edited successfully.</div>
+
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control" formControlName="productName"> 
+                     
+                <div *ngIf="productName.touched && productName.invalid" class="alert alert-danger">
+                    
+                    <div *ngIf="productName.errors.required">Item Name is required</div>
+                    <div *ngIf="productName.errors?.maxlength">Item Name cannot exceed 200 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="productImg">Image URL</label>
+                <input type="text" class="form-control" id="productImg" placeholder="" formControlName="productImg"
+                   >
+                <div *ngIf="productImg.touched && productImg.invalid" class="alert alert-danger">
+                    <div *ngIf="productImg.errors.required">Image URL is required</div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-lg-3">
+                    <label for="ratePerQuantity">Price Per Quantity</label>
+                    <input type="number" class="form-control" id="ratePerQuantity" formControlName="ratePerQuantity"
+                        >
+                    <div *ngIf=" ratePerQuantity.touched && ratePerQuantity.invalid" class="alert alert-danger">
+                        <div *ngIf="ratePerQuantity.errors.required">Price is required</div>
+                        <div *ngIf="ratePerQuantity.errors.pattern">Price can only contain numbers</div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label for="dateOfManf">Date of Manufacture</label>
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="dateOfManf" formControlName="dateOfManf"
+                            >
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="material-icons">
+                                    event
+                                </i>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div *ngIf=" dateOfManf.touched && dateOfManf.invalid" class="alert alert-danger">
+                        <div *ngIf="dateOfManf.errors.required">Date of manufacture is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label for="dateOfExpiry">Date of Expiry</label>
+                    <div class="input-group">
+                        <input type="date" class="form-control" id="dateOfExpiry" formControlName="dateOfExp"
+                            >
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="material-icons">
+                                    event
+                                </i>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div *ngIf=" dateOfExp.touched && dateOfExp.invalid" class="alert alert-danger">
+                        <div *ngIf="dateOfExp.errors.required">Date of expiry is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-lg-3">
+                    <label for="productType">Category</label>
+                    <select *ngIf="product.productType =='Clothing'" id="productType" class="form-control"
+                        formControlName="productType">
+                        <option selected value="Clothing">Clothing</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Food">Food</option>
+                    </select>
+
+                    <select *ngIf="product.productType =='Shoes'" id="productType" class="form-control"
+                        formControlName="productType">
+                        <option value="Clothing">Clothing </option>
+                        <option selected value="Shoes">Shoes</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Food">Food</option>
+                    </select> 
+
+                    <select *ngIf="product.productType =='Electronics'" id="productType" class="form-control"
+                        formControlName="productType">
+                        <option value="Clothing">Clothing </option>
+                        <option value="Shoes">Shoes</option>
+                        <option selected value="Electronics">Electronics</option>
+                        <option value="Food">Food</option>
+                    </select>
+
+                    <select *ngIf="product.productType =='Food'" id="productType" class="form-control"
+                        formControlName="productType">
+                        <option value="Clothing">Clothing</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Electronics">Electronics</option>
+                        <option selected value="Food">Food</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-lg-3">
+                    <label for="aisle">Aisle</label>
+                    <input type="text" class="form-control" id="aisle" formControlName="aisle">
+                    <div *ngIf=" aisle.touched && aisle.invalid" class="alert alert-danger">
+                        <div *ngIf="aisle.errors.required">Aisle is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label for="shelf">Shelf</label>
+                    <input type="text" class="form-control" id="shelf" formControlName="shelf">
+                    <div *ngIf=" shelf.touched && shelf.invalid" class="alert alert-danger">
+                    <div *ngIf="shelf.errors.required">Shelf is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label for="text">Brand</label>
+                    <input type="text" class="form-control" id="brand" placeholder="" formControlName="brand"
+                       >
+                    <div *ngIf=" brand.touched && brand.invalid" class="alert alert-danger">
+                        <div *ngIf="brand.errors.required">Brand is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label for="productCode">Product Code</label>
+                    <input type="text" class="form-control" id="productCode" placeholder="" formControlName="productCode">
+                    <div *ngIf=" productCode.touched && productCode.invalid" class="alert alert-danger">
+                        <div *ngIf="productCode.errors.required">Product code is required</div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="form-row">
+            <div class="form-group col-lg-3">
+                <label for="stockCount">Stock Count</label>
+                <input type="number" class="form-control" id="stockCount" placeholder="" formControlName="stockCount"
+                    >
+                <div *ngIf=" stockCount.touched && stockCount.invalid" class="alert alert-danger">
+                    <div *ngIf="stockCount.errors.required">Stock count is required</div>
+                </div>
+            </div>
+            </div>
+
+        <br>
+            <div class="col-xs">
+                <button type="submit" id="button" class="btn btn-primary" 
+                [disabled]="editForm.invalid">Save</button>
+            </div>
+        </form>
+        <div class="pt-1 edit-form">
+            <button (click)="delete()" id="button" class="btn btn-danger">Delete</button>
+        </div>
+    </div>
+</body>

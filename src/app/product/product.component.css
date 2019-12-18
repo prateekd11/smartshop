@@ -25,15 +25,14 @@
 
   .button {
     position: absolute;
-    width: 330px;
+    width: 100%;
     color:white;
-    right:0px;
-    top: 90px;
-    padding:10px;
-    text-align: center;
+    top:10px;
+    padding:100px;
     opacity: 0;
     transition: opacity .35s ease;
     cursor: pointer;
+    right: 5px;
   }
   
   .card-img-top {
@@ -46,7 +45,6 @@
 
   .button a {
     width: 200px;
-    padding: 12px 48px;
     text-align: center;
     color: white;
     border: solid 2px white;
@@ -62,7 +60,7 @@
     background: rgba(0, 0, 0, .3);
   }
 
-  .add-card-text {
+  .card-title {
       text-align: center;
       color:black;
   }
@@ -71,7 +69,7 @@
       margin-left:20px;
       border-radius: 10px;
       margin-top:10px;
-      width:335px;
+      width:300px;
       margin-bottom: 10px;
   }
 
@@ -80,3 +78,17 @@
       width:370px;
     }
   }
+
+  .sort-select{
+    float:right;
+    margin-left:20px;
+  }
+
+  .loading{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width:150px;
+    height: 150px;
+}

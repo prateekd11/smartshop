@@ -1,0 +1,43 @@
+<img src="./assets/loading.gif" *ngIf="loading" class="loading">
+<div class="container-fluid" *ngIf="!loading">
+<h4 class="text-primary text-center mt-3">Enter Offer Details</h4>
+<div class="row">
+<div class="card col-md-12 col-lg-4 offset-lg-4 mt-3" >
+        <form [formGroup]="editOfferForm">
+                <div class="form-group">
+                        <label for="offerName"><b> Offer Name:</b></label><br>
+                        <input class="form-control" formControlName="offerName" type="text">
+                        <div *ngIf="editOfferForm.get('offerName').touched && editOfferForm.get('offerName').invalid" class="alert alert-danger">
+                                Username is required
+                        </div>
+                </div>
+        <br>
+                <div class="form-group">
+                        <label for="offerDate"><b>Offer Date:</b></label><br>
+                        <input class="form-control" type="Date" formControlName="offerDate">
+                        <div *ngIf="editOfferForm.get('offerDate').touched && editOfferForm.get('offerDate').invalid" class="alert alert-danger">
+                                Give Valid Date
+                        </div>
+                </div>
+        <br>
+                <div class="form-group">
+                        <label for="productCode"><b>Product Code:</b></label><br>
+                        <input class="form-control" formControlName="productCode" type="text">
+                        <div *ngIf="editOfferForm.get('productCode').touched && editOfferForm.get('productCode').invalid" class="alert alert-danger">
+                                Enter valid Product Code
+                        </div>
+                </div>
+        <br>
+                <div class="form-group">
+                        <label for="discountedRate"> <b>Discounted Rate:</b></label><br>
+                        <input class="form-control" formControlName="discountedRate" type="number">
+                        <div *ngIf="editOfferForm.get('discountedRate').touched && editOfferForm.get('discountedRate').invalid" class="alert alert-danger">
+                                Discounted Rate can't be blank
+                        </div>
+                </div>
+        <br>
+        <button routerLink="/" (click)="editOffer()"[disabled] = "editOfferForm.invalid" class="btn btn-primary w-100" >submit</button>
+        </form>
+</div>
+</div>
+</div>

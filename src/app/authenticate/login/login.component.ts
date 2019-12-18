@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms'
 import { FormValidator } from '../form-validator';
-import { FormsService } from 'src/app/services/forms.service';
+import { FormsService } from '../../services/forms.service';
 import { AuthService } from "../auth.service";
 import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../authentication.service';
-import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +17,9 @@ export class LoginComponent implements OnInit {
   validCredentials: boolean;
   approved: boolean = false;
   redirect: string;
+  submitted: boolean = false;
+  accountExists: boolean = false;
+  loading: boolean = false;
   constructor(private formBuilder: FormBuilder, private formsService: FormsService,
     private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -29,12 +30,10 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(param => {
-      this.redirect = param.get('from');
-    });
-    if(this.redirect !== null) {
-      console.log(this.redirect);
-      this.router.navigate['/'+this.redirect];
+    if(this.authService.getToken() != null) {
+      this.successLogin = true;
+      this.validCredentials= true;
+      console.log('Token is extracted. Token is correct. '+ this.authService.getToken());
     }
   }
 
@@ -47,32 +46,35 @@ export class LoginComponent implements OnInit {
   }
 
   async submit() {
+    this.loading = true;
     await this.authService.isApproved(this.userId.value).toPromise().then(res =>{
-       this.approved = res;
+    this.accountExists = res[0];
+    this.approved = res[1];
+      console.log(this.approved, this.accountExists);
     })
-    if(this.approved == true) {
-    await this.authService.authenticate(this.form.value.userId, this.form.value.password).toPromise().then(async (res) => {
+    if(this.approved && this.accountExists) {
+    await this.authService.authenticate(this.form.value.userId, this.form.value.password).toPromise().then((res) => {
+     this.loading = false;
       this.successLogin = true;
       this.authService.setToken(res.token);
-      //this.authService.isAdmin = false;
-      this.authService.loggedIn = true;
-      this.authService.userId = this.userId.value;
-      //this.productService.isLoggedIn = true;
+      this.authService.setRole(res.role);
+      localStorage.setItem('userId', this.userId.value);
       this.authService.name = this.form.value.username;
-      if (res.role === 'ROLE_ADMIN') {
-        this.authService.isAdmin = true;
-      } else if(res.role === 'ROLE_MANAGER') {
-        this.authService.isManager = true;
-      } else {
-        this.authService.isUser = true;
-      }
       this.router.navigateByUrl('');
       this.validCredentials = true;
       this.router.navigate(['']);
-    }, () => { this.successLogin = false; this.validCredentials = false; }
+    }, error => { 
+      this.successLogin = false; 
+      this.validCredentials = false; }
     );
-  } else {
+    this.submitted = true;
+  } else if(!this.approved && this.accountExists) {
+    this.loading = false;
     alert('Your account is not yet approved. Please contact admin');
+  } else if(!this.accountExists) {
+    this.loading = false;
+    alert('Account wih that user Id does not exists');
+
   }
 }
 }

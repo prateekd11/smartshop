@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+ 
+
+    <hr />
+
+    <div class="container rego px-33 py-33">
+        <div class="row text-black" style="background-color: white; box-shadow: black ">
+<div class="col">
+        <img src="./assets/loading.gif" *ngIf="loading" class="loading">
+    <h3 class="text-center" style="-webkit-text-fill-color: darkblue"> Your feedback is Valuable</h3>
+    <form [formGroup]="form">
+<div class="app-questions" *ngFor="let question of feedbackQuestion; let i = index" [attr.data-index]="i">
+    <div class="form-group">
+        <div class="custom-control custom-radio ">
+            <label><strong>{{question}}</strong></label>
+            <p>
+            <input formControlName="{{answerNames[i]}}" class="form-control w-100" type="text" placeholder="Your comment here">
+            <div  class="alert alert-danger" *ngIf="form.get(answerNames[i]).touched && 
+            form.get(answerNames[i]).invalid">Question is compulsory</div>
+        </div>
+    </div>
+</div>
+</form>
+
+<div *ngIf="!loading">
+<button class="btn btn-primary ml-3" routerLink="">Skip</button>
+<button [disabled]="form.invalid" class="btn btn-success ml-3" (click)="submit()">Submit</button>
+</div>
+</div>
+</div>
+</div>
+</body>
+
+</html>

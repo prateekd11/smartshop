@@ -12,8 +12,14 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { ProductComponent } from './product/product.component';
 import { SearchComponent } from './search/search.component';
 import { ItemInfoComponent } from './item-info/item-info.component';
-import { EditComponent } from './edit/edit.component';
-import { PasswordResetComponent } from './password-reset/password-reset.component'
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { EditOfferComponent } from './edit-offer/edit-offer.component';
+import { OfferComponent } from './offer/offer.component';
+import { BillingComponent } from './billing/billing.component';
+import { SuperUserComponent } from './super-user/super-user.component';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { FeedbackComponent } from './feedback/feedback.component'
 
 @NgModule({
   declarations: [
@@ -25,8 +31,14 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     ProductComponent,
     SearchComponent,
     ItemInfoComponent,
-    EditComponent,
-    PasswordResetComponent
+    EditProductComponent,
+    PasswordResetComponent,
+    EditOfferComponent,
+    OfferComponent,
+    BillingComponent,
+    SuperUserComponent,
+    PurchaseHistoryComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

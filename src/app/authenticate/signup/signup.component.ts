@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormControlName } from '@angular/forms';
 import { FormValidator } from '../form-validator';
 import { User } from 'src/app/User';
@@ -12,9 +12,10 @@ import { UserService } from '../user.service';
 })
 export class SignupComponent implements OnInit {
 
-  isUser:boolean = false;
+  isUser:boolean = true;
   form: FormGroup;
-
+  loading:boolean = false;
+  @ViewChild("modal",{static:false}) modal;
   constructor(formBuilder: FormBuilder, private userService: UserService, private route: Router) { 
 
     this.form = formBuilder.group({
@@ -26,7 +27,7 @@ export class SignupComponent implements OnInit {
       password : new FormControl('',[Validators.required, Validators.minLength(4)]),
       confirmPassword : new FormControl('',[Validators.required, Validators.minLength(4)]),
       gender: new FormControl(null,Validators.required),
-      age:new FormControl('',[Validators.required, FormValidator.ageNotValid]),
+      age:new FormControl('',[Validators.required, FormValidator.ageNotValid, FormValidator.invalidPhone]),
       secQuestion : new FormControl('', Validators.required),
       secAnswer : new FormControl('', Validators.required)
     }, {validator: FormValidator.passwordsMustMatch});
@@ -57,13 +58,18 @@ export class SignupComponent implements OnInit {
 
 
   submit() {
+    this.loading = true;
     let user: User = this.form.value;
+    console.log("this.isUser",this.isUser);
     this.userService.signup(user, this.isUser).subscribe((res) => {
+      this.loading = false;
         if(res === true) {
           alert('Signup successful!! Now Log in');
+          //document.getElementById("modal").style["display"] = "block";
         }
         else {
-          alert('Could not create account! Try later!!');
+          alert('There was an error creating an account');
+          //document.getElementById("modal").style["display"] = "block";
         }
         this.clearForm();
     });
@@ -75,11 +81,24 @@ export class SignupComponent implements OnInit {
     this.password.reset();
     this.secAnswer.reset();
     this.secQuestion.reset();
-    this.age.reset();
-    this.userId.reset();
-    this.confirmPassword.reset();
-    this.contactNumber.reset();
+    this.age.setValue('');
+    this.userId.setValue('');
+    this.confirmPassword.setValue('');
+    this.contactNumber.setValue('');
     this.form.reset();
+  }
+
+  keyPress(event: any) {
+    const pattern = /[0-9\  ]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
+  useReward($event) {
+    this.isUser = !this.isUser;
   }
 
 }

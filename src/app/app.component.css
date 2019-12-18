@@ -10,6 +10,7 @@ footer {
     padding-left: 8px;
     color: white;
     background-color: #0062cc;
+    width: 100%;
   }
 
   .btn-white {
@@ -19,4 +20,27 @@ footer {
 
   .logout{
       cursor: pointer;
+  }
+  
+  .material-icons:hover{
+      cursor:pointer;
+    color: gainsboro;
+  }
+
+  .vertical{
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }
+
+  .nav-item:hover {
+    background-color: #1976d2;
+    border-radius: 10px;
+  }
+
+  .search{
+    margin-right:10px;
+  }
+
+  .app-container-div{
+    min-height: 550px;
   }

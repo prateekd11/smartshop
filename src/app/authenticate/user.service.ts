@@ -22,9 +22,9 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  signup(user: User, isUser: boolean):Observable<Object> {
+  signup(user: User, isUser: boolean):Observable<boolean> {
     console.log('in user service');
-    return this.http.post(this.baseUrl+'/users/'+isUser,user, this.authCredentials)
+    return this.http.post<boolean>(this.baseUrl+'/users/'+isUser,user, this.authCredentials)
   }
 
   getUsers() {

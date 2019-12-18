@@ -15,12 +15,25 @@ export class ItemInfoComponent implements OnInit {
   @Input('product') product: Product;
   cartAddedId: number;
 
-  constructor( private authService: AuthService) {
+
+  constructor( public authService: AuthService) {
 
   }
 
   ngOnInit() {
-   // this.isAdmin = this.foodService.isAdmin;
+   console.log(this.product.productType);
+  }
+
+  newProduct(product: Product) {
+    let date = new Date();
+    let newDate = date.getDate() - 8;
+    date.setDate(newDate);
+    let cmpDate = date.toISOString().substring(0,10);
+    let addDate = product.addDate.toString().substring(0,10);
+   if(Date.parse(cmpDate)  < Date.parse(addDate) ){
+     return true;
+   }
+   return false;
   }
 
 }

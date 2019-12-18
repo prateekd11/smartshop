@@ -14,29 +14,21 @@ export class SearchComponent implements OnInit {
   itemList: Product[] = [];
   searchedItemList: Product[] = [];
   isAdmin: boolean;
-  category:string;
+  itemName:string;
   searchValue:string;
   constructor(private productService: ProductService, private route: ActivatedRoute) {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.route.queryParamMap.subscribe(param => {
-    this.category = param.get('category');
-    console.log(this.category);  
+    this.itemName = param.get('itemName');
+    console.log(this.itemName);  
+    this.search(this.itemName);
   })
 
-  //this.searchValue = this.route.snapshot.paramMap.get('search');
-  //console.log(this.searchValue);
-  /*if(this.category !== null) {*/
-    /*this.productService.getProductsByCategory(this.category).subscribe((products) => {
-      this.itemList = products;
-    });
-    this.*/
-   /*  }
-     else {*/
-       this.productService.getAllItems().subscribe((products) => {
+       await this.productService.getAllItems().toPromise().then((products) => {
          this.itemList = products;
          console.log(products);
        });
@@ -50,6 +42,8 @@ export class SearchComponent implements OnInit {
     this.searchedItemList = this.itemList.filter((product) => 
       product.productName.toLowerCase().includes(value.toLowerCase()));
     this.productService.getSubject().next(this.searchedItemList);
+    if(this.searchedItemList.length <= 0)
+      this.productService.notFound = true;  
   }
 
 }

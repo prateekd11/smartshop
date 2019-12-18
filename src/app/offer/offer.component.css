@@ -1,0 +1,32 @@
+.create{
+    cursor: pointer;  
+    color:green;  
+}
+.delete_forever{
+    color:red;
+    cursor:pointer;
+}
+
+.thead-blue{
+    background-color: #0062cc;
+    color:white;
+}
+
+.btn{
+    background-color: #0062cc;
+    color:white;
+    border:none
+}
+
+th,td{
+    padding:20px;
+}
+
+.loading{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width:150px;
+    height: 150px;
+}

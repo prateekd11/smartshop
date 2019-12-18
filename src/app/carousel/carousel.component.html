@@ -1,16 +1,17 @@
 <div >
     <div class="card border-0 rounded-0 text-light app-ht">
         <div class="position-relative">
-            <ngb-carousel #carousel interval="2000" [pauseOnHover]="pauseOnHover" (slide)="onSlide($event)">
+            <ngb-carousel #carousel interval="2000" [pauseOnHover]="pauseOnHover"
+            showNavigationArrows="false" showNavigationIndicators="false">
                 <ng-template ngbSlide *ngFor="let img of images; index as i">
                 <div class="carousel-caption">
                     <h3>{{img.name}}</h3>
                 </div>
-                <a href="{{img.imageUrl}}" target="_blank" rel="nofollow noopener noreferrer">
+                
                     <div class="picsum-img-wrapper">
-                    <img class="img-fluid w-100" [src]="img.imageUrl" alt="{{img.name}}">
+                    <img class="img-fluid w" [src]="img.imageUrl" alt="{{img.name}}"  routerLink="products"
+                    [queryParams]="{'category': category}">
                     </div>
-                </a>
                 </ng-template>
             </ngb-carousel>
         </div>

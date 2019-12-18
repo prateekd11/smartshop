@@ -17,23 +17,58 @@
                     aria-label="Search" #searchItem>
                     <button class="btn btn-white my-2 my-sm-0 material-icons" type="submit">search</button>
                 </form>-->
+                <li class="nav-item active search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="" placeholder="Quick Search" 
+                        #itemName (keyup.enter)="search(itemName);" required>
+                        <div class="input-group-append quick-search-btn" (click)="search(itemName)" >
+                            <span class="input-group-text"  >
+                              <i class="material-icons">
+                                search
+                            </i></span>
+                          </div>
+                      </div> 
+                </li>
+                <li class="nav-item active" *ngIf="authService.loggedIn() && !authService.isManager()
+                  && !authService.isAdmin()">
+                  <div class="form-inline">
+                      <a class="nav-link text-white" routerLink="purchases">My orders</a>
+                  </div>
+              </li>
+              <li class="nav-item active" *ngIf="authService.loggedIn() && !authService.isManager()
+                  && !authService.isAdmin()">
+                  <div class="form-inline">
+                      <a class="nav-link text-white" routerLink="feedback">Feedback</a>
+                  </div>
+              </li>
+              <li class="nav-item active" *ngIf="authService.loggedIn() && authService.isManager()">
+                  <div class="form-inline">
+                      <a class="nav-link text-white" routerLink="billing">Billing</a>
+                  </div>
+              </li>
+              <li class="nav-item active" *ngIf="authService.isAdmin()">
+                    <div class="form-inline">
+                        <a class="nav-link text-white" routerLink="permissions">Permissions</a>
+                    </div>
+                </li>
               <li class="nav-item active">
                   <a class="nav-link" routerLink="offers">Offers<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item active">
-                  <div class="form-inline" *ngIf="!authService.loggedIn">
+                  <div class="form-inline" *ngIf="!authService.loggedIn()">
                       <a class="nav-link text-white" routerLink="login">Login </a>
                   </div>
-                  <div class="form-inline" *ngIf="authService.loggedIn">
-                    <a class="nav-link text-white">{{authService.userId}}</a>
+                  <div class="form-inline" *ngIf="authService.loggedIn()">
+                    <a class="nav-link text-white"> <i class="material-icons vertical"> person </i> {{authService.userId()}}
+                    </a>
                 </div>
               </li>
-              <li class="nav-item active" *ngIf="!authService.loggedIn">
+              <li class="nav-item active" *ngIf="!authService.loggedIn()">
                 <div class="form-inline">
                     <a class="nav-link text-white" routerLink="register">Register</a>
                 </div>
             </li>
-            <li class="nav-item active logout" *ngIf="authService.loggedIn">
+            <li class="nav-item active logout" *ngIf="authService.loggedIn()">
               <div class="form-inline">
                   <a class="nav-link text-white" (click)="authService.logout()">Logout</a>
               </div>
@@ -41,9 +76,11 @@
           </ul>
       </div>
   </nav>
+<div class="app-container-div">
 <router-outlet></router-outlet>
-<!--<footer>
+</div>
+<footer>
         <div class="footer-copyright text-left py-3 pl-6">
-            Copyright 2019
+                &copy;  Copyright 2019
         </div>
-</footer>-->
+</footer>

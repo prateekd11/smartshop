@@ -13,24 +13,64 @@ export class ProductComponent implements OnInit {
 
   category: string;
   products : Product[] = [];
-  //searchValue:string;
-  constructor(private route: ActivatedRoute, private productService: ProductService, 
-    private authService:AuthService) { }
+  product: Product;
+  itemName: string;
+  selectedLevel:string = 'name';
+  loading:boolean = false;
+  constructor(private route: ActivatedRoute, public productService: ProductService, 
+    public authService:AuthService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.route.queryParamMap.subscribe(param => {
       this.category = param.get('category');
-      console.log(this.category);
+      this.itemName = param.get('itemName');
     });
-   // this.route.snapshot.paramMap.get('search');
-    this.productService.getProductsByCategory(this.category).subscribe(products => {
+
+   if(this.category != null) {
+     //Shop by category functionality
+    this.productService.getProductsByCategory(this.category, 'name').subscribe(products => {
+      this.loading = false;
       this.products = products;
-      console.log("products ",this.products);
+      if(this.products.length > 0){
+        this.productService.notFound = false;
+      }
     });
-    this.productService.getSubject().subscribe((data) => {
+  }
+
+  if(this.itemName != null) {
+    //Quick search functionality
+    this.productService.getAllItems().subscribe(products => {
+      this.loading = false;
+      this.products = products.filter((product) => 
+      product.productName.toLowerCase().includes(this.itemName.toLowerCase()));
+      if(this.products.length > 0){
+        this.productService.notFound = false;
+      }
+    });
+
+  }
+
+  this.productService.getSubject().subscribe((data) => {
+    this.products = data;
+    if(this.products.length > 0){
+      this.productService.notFound = false;
+    }
+  });
+  
+    this.productService.products$.subscribe((data) => {
       this.products = data;
+      if(this.products.length > 0){
+        this.productService.notFound = false;
+      }
     });
+
    
+  }
+
+  selected(){
+    if(this.selectedLevel != null || this.selectedLevel !='')
+      this.productService.getSortedProducts(this.category, this.selectedLevel);
   }
 
 }
